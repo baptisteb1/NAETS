@@ -1,0 +1,248 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@300;400;500;600&display=swap');
+
+:root {
+  --font-bebas: 'Bebas Neue', sans-serif;
+  --font-inter: 'Inter', sans-serif;
+
+  /* NÆTS Color System */
+  --naets-black: #000000;
+  --naets-white: #FFFFFF;
+  --naets-off-white: #F5F5F2;
+  --naets-light-gray: #E5E5E0;
+  --naets-mid-gray: #BDBDB7;
+  --naets-dark-gray: #707070;
+  --naets-near-black: #111111;
+}
+
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  background-color: #FFFFFF;
+  color: #000000;
+  font-family: var(--font-inter), 'Helvetica Neue', Arial, sans-serif;
+  font-size: 14px;
+  line-height: 1.5;
+  overflow-x: hidden;
+}
+
+/* NÆTS Typography System */
+.font-naets-title {
+  font-family: var(--font-bebas), 'Oswald', 'Arial Narrow', sans-serif;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+.font-naets-label {
+  font-family: var(--font-inter), 'Helvetica Neue', Arial, sans-serif;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  font-size: 11px;
+  font-weight: 500;
+}
+
+.font-naets-micro {
+  font-family: var(--font-inter), 'Helvetica Neue', Arial, sans-serif;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  font-size: 10px;
+  font-weight: 400;
+  color: #707070;
+}
+
+/* Grid corners decoration */
+.corner-tl::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 12px;
+  height: 12px;
+  border-top: 1px solid #000;
+  border-left: 1px solid #000;
+}
+
+.corner-tr::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 12px;
+  height: 12px;
+  border-top: 1px solid #000;
+  border-right: 1px solid #000;
+}
+
+/* Section numbering */
+.section-number {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 20px;
+  height: 20px;
+  background: #000;
+  color: #fff;
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0;
+  flex-shrink: 0;
+}
+
+/* Technical border system */
+.border-naets {
+  border: 1px solid #E5E5E0;
+}
+
+.border-naets-dark {
+  border: 1px solid #000;
+}
+
+/* Dashed patterns */
+.dashed-border {
+  border: 1px dashed #BDBDB7;
+}
+
+/* Line hover effects */
+.hover-line {
+  position: relative;
+  display: inline-block;
+}
+
+.hover-line::after {
+  content: '';
+  position: absolute;
+  bottom: -1px;
+  left: 0;
+  width: 0;
+  height: 1px;
+  background: currentColor;
+  transition: width 0.2s ease;
+}
+
+.hover-line:hover::after {
+  width: 100%;
+}
+
+/* Arrow styling */
+.arrow-link::after {
+  content: ' →';
+}
+
+/* Scrollbar */
+::-webkit-scrollbar {
+  width: 4px;
+}
+
+::-webkit-scrollbar-track {
+  background: #F5F5F2;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #BDBDB7;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #707070;
+}
+
+/* Focus states - accessible */
+:focus-visible {
+  outline: 2px solid #000;
+  outline-offset: 2px;
+}
+
+/* Button reset */
+button {
+  cursor: pointer;
+}
+
+/* Selection */
+::selection {
+  background: #000;
+  color: #fff;
+}
+
+/* Transition defaults */
+a, button {
+  transition: all 0.15s ease;
+}
+
+/* Image optimization */
+img {
+  display: block;
+  max-width: 100%;
+}
+
+/* Dot pattern background */
+.dot-pattern {
+  background-image: radial-gradient(circle, #BDBDB7 1px, transparent 1px);
+  background-size: 16px 16px;
+}
+
+/* Grid line background */
+.grid-pattern {
+  background-image:
+    linear-gradient(#E5E5E0 1px, transparent 1px),
+    linear-gradient(90deg, #E5E5E0 1px, transparent 1px);
+  background-size: 40px 40px;
+}
+
+/* Overlay for mega menu / cart / search */
+.overlay-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.5);
+  z-index: 40;
+  animation: fadeIn 0.15s ease;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes slideInRight {
+  from { transform: translateX(100%); }
+  to { transform: translateX(0); }
+}
+
+@keyframes slideInDown {
+  from { transform: translateY(-8px); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
+}
+
+.animate-slide-in-right {
+  animation: slideInRight 0.25s cubic-bezier(0.25, 0.1, 0.25, 1);
+}
+
+.animate-slide-in-down {
+  animation: slideInDown 0.2s cubic-bezier(0.25, 0.1, 0.25, 1);
+}
+
+/* Placeholder image system */
+.placeholder-image {
+  background: linear-gradient(135deg, #E5E5E0 0%, #BDBDB7 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.placeholder-image-dark {
+  background: linear-gradient(135deg, #111111 0%, #333333 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
