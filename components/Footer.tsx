@@ -15,7 +15,7 @@ interface FooterColumn {
 
 const columns: FooterColumn[] = [
   { title: 'PRODUITS',     items: footerNav.produits    },
-  { title: 'COLLECTIONS',  items: footerNav.collections },
+  { title: 'DROP',          items: footerNav.collections },
   { title: 'ASSISTANCE',   items: footerNav.assistance  },
   { title: 'NÆTS',         items: footerNav.naets       },
 ];

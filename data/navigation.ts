@@ -166,8 +166,6 @@ export const shopMegaMenuData: ShopMegaMenuData = {
         {
           title: "DROP",
           links: [
-            { label: "Nouveautés", href: "/shop/homme/nouveautes" },
-            { label: "Promotions", href: "/shop/homme/promotions" },
             { label: "Drop 1", href: "/shop/homme/drop-1" },
           ],
         },
@@ -211,8 +209,6 @@ export const shopMegaMenuData: ShopMegaMenuData = {
         {
           title: "DROP",
           links: [
-            { label: "Nouveautés", href: "/shop/femme/nouveautes" },
-            { label: "Promotions", href: "/shop/femme/promotions" },
             { label: "Drop 1", href: "/shop/femme/drop-1" },
           ],
         },
