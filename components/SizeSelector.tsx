@@ -1,12 +1,12 @@
 'use client';
 
 import { cn } from '@/lib/utils';
+import type { ProductSize } from '@/data/products';
 
 interface SizeSelectorProps {
-  sizes: string[];
+  sizes: ProductSize[];
   selectedSize: string | null;
   onSelect: (size: string) => void;
-  unavailableSizes?: string[];
   category?: 'chaussures' | 'vetements' | 'accessoires';
 }
 
@@ -14,7 +14,6 @@ export default function SizeSelector({
   sizes,
   selectedSize,
   onSelect,
-  unavailableSizes = [],
   category = 'chaussures',
 }: SizeSelectorProps) {
   const isShoe = category === 'chaussures';
@@ -38,28 +37,28 @@ export default function SizeSelector({
       </div>
 
       <div className={cn('grid gap-2', isShoe ? 'grid-cols-5' : 'grid-cols-6')}>
-        {sizes.map((size) => {
-          const unavailable = unavailableSizes.includes(size);
-          const selected = selectedSize === size;
+        {sizes.map(({ label, available }) => {
+          const selected = selectedSize === label;
           return (
             <button
-              key={size}
-              onClick={() => !unavailable && onSelect(size)}
-              disabled={unavailable}
+              key={label}
+              onClick={() => available && onSelect(label)}
+              disabled={!available}
               aria-pressed={selected}
-              aria-label={`Taille ${size}${unavailable ? ' (indisponible)' : ''}`}
+              aria-label={`Taille ${label}${!available ? ' (indisponible)' : ''}`}
               className={cn(
                 'relative h-11 text-xs tracking-wide font-medium border transition-all duration-150',
+                'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-naets-black focus-visible:ring-offset-1',
                 selected
                   ? 'bg-black text-white border-black'
-                  : unavailable
+                  : !available
                   ? 'border-naets-light-gray text-naets-mid-gray cursor-not-allowed bg-naets-off-white'
                   : 'border-naets-light-gray text-black hover:border-black'
               )}
               style={{ fontFamily: 'var(--font-inter), Inter, sans-serif' }}
             >
-              {size}
-              {unavailable && (
+              {label}
+              {!available && (
                 <span
                   className="absolute inset-0 flex items-center justify-center"
                   aria-hidden="true"
