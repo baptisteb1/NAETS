@@ -24,53 +24,8 @@ export const mainNav: NavLink[] = [
   {
     label: "SHOP",
     href: "/shop",
-    megaMenu: {
-      columns: [
-        {
-          number: "01",
-          title: "GENRE",
-          items: [
-            { label: "Shop Homme", href: "/shop?genre=homme" },
-            { label: "Shop Femme", href: "/shop?genre=femme" },
-            { label: "Produits Unisexes", href: "/shop?genre=unisexe" },
-          ],
-          note: "Tous nos produits sont unisexes",
-        },
-        {
-          number: "02",
-          title: "COLLECTION",
-          items: [
-            { label: "Drop 1", href: "/collections/drop-1" },
-            { label: "Æ-ESSENTIAL", href: "/collections/ae-essential" },
-            { label: "Æ-REFLEX", href: "/collections/ae-reflex" },
-            { label: "Æ-SLYDE", href: "/collections/ae-slyde" },
-          ],
-        },
-        {
-          number: "03",
-          title: "CHAUSSURES",
-          items: [
-            { label: "All", href: "/shop?category=chaussures" },
-            { label: "Running", href: "/shop?category=chaussures&usage=running" },
-            { label: "Entraînements", href: "/shop?category=chaussures&usage=entrainement" },
-            { label: "Compétitions", href: "/shop?category=chaussures&usage=competition" },
-          ],
-        },
-        {
-          number: "04",
-          title: "VÊTEMENTS",
-          items: [
-            { label: "All", href: "/shop?category=vetements" },
-            { label: "T-shirts", href: "/shop?category=vetements&type=tshirt" },
-            { label: "Débardeur", href: "/shop?category=vetements&type=debardeur" },
-            { label: "Veste", href: "/shop?category=vetements&type=veste" },
-            { label: "Short", href: "/shop?category=vetements&type=short" },
-            { label: "Cycliste", href: "/shop?category=vetements&type=cycliste" },
-          ],
-          note: "Catégories évolutives selon les nouveautés",
-        },
-      ],
-    },
+    // megaMenu stub keeps header hover/aria logic intact — content rendered by ShopMegaMenu
+    megaMenu: { columns: [] },
   },
   {
     label: "PHILOSOPHIE",
@@ -173,3 +128,136 @@ export const legalNav = [
   { label: "Mentions légales", href: "/mentions-legales" },
   { label: "Gérer mes consentements", href: "/consentements" },
 ];
+
+// ─── Shop mega menu ───────────────────────────────────────────────────────────
+
+export interface ShopLink {
+  label: string;
+  href: string;
+}
+
+export interface ShopColumn {
+  title: string;
+  links: ShopLink[];
+}
+
+export interface ShopCategory {
+  handle: string;
+  label: string;
+  columns: ShopColumn[];
+}
+
+export interface ShopPromo {
+  title: string;
+  href: string;
+}
+
+export interface ShopMegaMenuData {
+  categories: ShopCategory[];
+  promos: ShopPromo[];
+}
+
+export const shopMegaMenuData: ShopMegaMenuData = {
+  categories: [
+    {
+      handle: "homme",
+      label: "HOMME",
+      columns: [
+        {
+          title: "DROP",
+          links: [
+            { label: "Nouveautés", href: "/shop/homme/nouveautes" },
+            { label: "Promotions", href: "/shop/homme/promotions" },
+            { label: "Drop 1", href: "/shop/homme/drop-1" },
+          ],
+        },
+        {
+          title: "CHAUSSURE",
+          links: [
+            { label: "All", href: "/shop/homme/chaussures" },
+            { label: "Æ-REFLEX", href: "/shop/homme/chaussures/ae-reflex" },
+            { label: "Running", href: "/shop/homme/chaussures/running" },
+            { label: "Compétition", href: "/shop/homme/chaussures/competition" },
+            { label: "Entraînement", href: "/shop/homme/chaussures/entrainement" },
+          ],
+        },
+        {
+          title: "VÊTEMENT",
+          links: [
+            { label: "All", href: "/shop/homme/vetements" },
+            { label: "T-shirts", href: "/shop/homme/vetements/t-shirts" },
+            { label: "Débardeur", href: "/shop/homme/vetements/debardeur" },
+            { label: "Veste", href: "/shop/homme/vetements/veste" },
+            { label: "Short", href: "/shop/homme/vetements/short" },
+            { label: "Cuissard", href: "/shop/homme/vetements/cuissard" },
+          ],
+        },
+        {
+          title: "ACCESSOIRE",
+          links: [
+            { label: "Casquettes", href: "/shop/homme/accessoires/casquettes" },
+            { label: "Chaussettes", href: "/shop/homme/accessoires/chaussettes" },
+            { label: "Tote bag", href: "/shop/homme/accessoires/tote-bag" },
+            { label: "Gourdes", href: "/shop/homme/accessoires/gourdes" },
+            { label: "Mousquetons", href: "/shop/homme/accessoires/mousquetons" },
+          ],
+        },
+      ],
+    },
+    {
+      handle: "femme",
+      label: "FEMME",
+      columns: [
+        {
+          title: "DROP",
+          links: [
+            { label: "Nouveautés", href: "/shop/femme/nouveautes" },
+            { label: "Promotions", href: "/shop/femme/promotions" },
+            { label: "Drop 1", href: "/shop/femme/drop-1" },
+          ],
+        },
+        {
+          title: "CHAUSSURE",
+          links: [
+            { label: "All", href: "/shop/femme/chaussures" },
+            { label: "Æ-REFLEX", href: "/shop/femme/chaussures/ae-reflex" },
+            { label: "Running", href: "/shop/femme/chaussures/running" },
+            { label: "Compétition", href: "/shop/femme/chaussures/competition" },
+            { label: "Entraînement", href: "/shop/femme/chaussures/entrainement" },
+          ],
+        },
+        {
+          title: "VÊTEMENT",
+          links: [
+            { label: "All", href: "/shop/femme/vetements" },
+            { label: "T-shirts", href: "/shop/femme/vetements/t-shirts" },
+            { label: "Débardeur", href: "/shop/femme/vetements/debardeur" },
+            { label: "Veste", href: "/shop/femme/vetements/veste" },
+            { label: "Short", href: "/shop/femme/vetements/short" },
+            { label: "Cuissard", href: "/shop/femme/vetements/cuissard" },
+          ],
+        },
+        {
+          title: "ACCESSOIRE",
+          links: [
+            { label: "Casquettes", href: "/shop/femme/accessoires/casquettes" },
+            { label: "Chaussettes", href: "/shop/femme/accessoires/chaussettes" },
+            { label: "Tote bag", href: "/shop/femme/accessoires/tote-bag" },
+            { label: "Gourdes", href: "/shop/femme/accessoires/gourdes" },
+            { label: "Mousquetons", href: "/shop/femme/accessoires/mousquetons" },
+          ],
+        },
+      ],
+    },
+  ],
+  promos: [
+    {
+      title: "Æ-REFLEX — LA PRÉCISION EN MOUVEMENT",
+      href: "/collections/ae-reflex",
+    },
+    {
+      title: "DROP 1 — ENGINEERED RUNNING PERFORMANCE",
+      href: "/shop/drop-1",
+    },
+  ],
+};
