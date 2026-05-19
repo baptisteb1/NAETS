@@ -1,15 +1,19 @@
 'use client';
 
 import { useState, useMemo } from 'react';
-import { Heart, ArrowRight, Truck, RotateCcw, ShieldCheck, MessageCircle } from 'lucide-react';
+import { Heart, ArrowRight, Truck, RotateCcw, ShieldCheck } from 'lucide-react';
 import Breadcrumb from '@/components/Breadcrumb';
-import SizeSelector from '@/components/SizeSelector';
+import ProductSlider from '@/components/ProductSlider';
+import ProductSizeDropdown from '@/components/ProductSizeDropdown';
+import ProductBenefitIcons from '@/components/ProductBenefitIcons';
+import ProductEditorialBlock from '@/components/ProductEditorialBlock';
+import ProductFeatureImageGrid from '@/components/ProductFeatureImageGrid';
+import ProductExplodedArchitecture from '@/components/ProductExplodedArchitecture';
 import QuantitySelector from '@/components/QuantitySelector';
 import TechnicalSpecs from '@/components/TechnicalSpecs';
 import Accordion from '@/components/Accordion';
 import ProductGrid from '@/components/ProductGrid';
 import ProductReviews from '@/components/ProductReviews';
-import ProductExplodedView from '@/components/ProductExplodedView';
 import { type Product, products, getComplementaryProducts } from '@/data/products';
 import { useCart } from '@/lib/cart-context';
 import { useWishlist } from '@/lib/wishlist-context';
@@ -20,118 +24,6 @@ import { cn } from '@/lib/utils';
 interface ProductPageContentProps {
   product: Product;
   related: Product[];
-}
-
-// ─── Gallery placeholder ──────────────────────────────────────────────────────
-
-function GalleryPlaceholder({ label, className }: { label: string; className?: string }) {
-  return (
-    <div
-      className={cn(
-        'relative flex items-center justify-center bg-[#EBEBEA] overflow-hidden select-none',
-        className
-      )}
-      aria-hidden="true"
-    >
-      <div
-        className="absolute inset-0 opacity-[0.04]"
-        style={{
-          backgroundImage: 'radial-gradient(circle, #000 1px, transparent 1px)',
-          backgroundSize: '18px 18px',
-        }}
-      />
-      <span
-        className="font-condensed text-[#C0C0B8] uppercase tracking-widest"
-        style={{ fontSize: 'clamp(16px, 2.5vw, 24px)', letterSpacing: '0.2em' }}
-      >
-        {label}
-      </span>
-      <span className="absolute top-3 left-3 w-4 h-4 border-t border-l border-black/15" />
-      <span className="absolute top-3 right-3 w-4 h-4 border-t border-r border-black/15" />
-      <span className="absolute bottom-3 left-3 w-4 h-4 border-b border-l border-black/15" />
-      <span className="absolute bottom-3 right-3 w-4 h-4 border-b border-r border-black/15" />
-    </div>
-  );
-}
-
-// ─── Gallery ──────────────────────────────────────────────────────────────────
-
-function ProductGallery({ productName }: { productName: string }) {
-  const [activeThumb, setActiveThumb] = useState(0);
-  const [lightboxOpen, setLightboxOpen] = useState(false);
-
-  const views = ['VUE 01', 'VUE 02', 'VUE 03'];
-
-  return (
-    <div className="flex flex-col gap-3">
-      {/* Micro top bar */}
-      <div className="flex items-center justify-between">
-        <span className="font-naets-micro text-naets-mid-gray text-[9px] tracking-[0.2em]">
-          PRODUCT VIEW
-        </span>
-        <span className="font-naets-micro text-naets-mid-gray text-[9px] tracking-[0.2em]">
-          {String(activeThumb + 1).padStart(2, '0')} / {String(views.length).padStart(2, '0')}
-        </span>
-      </div>
-
-      {/* Main image */}
-      <button
-        className="w-full cursor-zoom-in"
-        style={{ aspectRatio: '4/5' }}
-        onClick={() => setLightboxOpen(true)}
-        aria-label={`Agrandir l'image de ${productName}`}
-      >
-        <GalleryPlaceholder label="NÆTS" className="w-full h-full" />
-      </button>
-
-      {/* Thumbnail strip */}
-      <div className="grid grid-cols-3 gap-2">
-        {views.map((label, i) => (
-          <button
-            key={i}
-            onClick={() => setActiveThumb(i)}
-            aria-label={`${label} — ${productName}`}
-            className={cn(
-              'relative overflow-hidden transition-all duration-150',
-              'focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-naets-black',
-              activeThumb === i
-                ? 'ring-1 ring-naets-black'
-                : 'ring-1 ring-naets-light-gray hover:ring-naets-mid-gray'
-            )}
-            style={{ aspectRatio: '1/1' }}
-          >
-            <GalleryPlaceholder label={label} className="w-full h-full" />
-          </button>
-        ))}
-      </div>
-
-      {/* Lightbox */}
-      {lightboxOpen && (
-        <div
-          className="fixed inset-0 z-50 bg-black/92 flex items-center justify-center"
-          role="dialog"
-          aria-modal="true"
-          aria-label="Image agrandie"
-          onClick={() => setLightboxOpen(false)}
-        >
-          <button
-            className="absolute top-6 right-8 font-naets-label text-white/50 hover:text-white text-[10px] tracking-[0.2em] transition-colors"
-            onClick={() => setLightboxOpen(false)}
-            aria-label="Fermer"
-          >
-            FERMER ✕
-          </button>
-          <div
-            className="w-full max-w-xl mx-8"
-            style={{ aspectRatio: '4/5' }}
-            onClick={(e) => e.stopPropagation()}
-          >
-            <GalleryPlaceholder label="NÆTS" className="w-full h-full" />
-          </div>
-        </div>
-      )}
-    </div>
-  );
 }
 
 // ─── Color selector ───────────────────────────────────────────────────────────
@@ -157,7 +49,7 @@ function ColorSelector({
 }) {
   return (
     <div>
-      <p className="font-sans text-[11px] tracking-[0.15em] uppercase font-medium mb-3">
+      <p className="font-naets-label text-naets-black text-[10px] tracking-[0.2em] uppercase mb-3">
         COLORIS — {selectedColor}
       </p>
       <div className="flex gap-2 flex-wrap">
@@ -219,75 +111,6 @@ function ReassuranceRow() {
         </div>
       ))}
     </div>
-  );
-}
-
-// ─── Long description section ─────────────────────────────────────────────────
-
-function LongDescriptionSection({ longDescription }: { longDescription: string }) {
-  const paragraphs = longDescription.trim().split('\n\n');
-  const intro = paragraphs[0];
-  const sections = paragraphs.slice(1);
-
-  return (
-    <section className="py-16 md:py-20 bg-white border-t border-naets-light-gray">
-      <div className="max-w-[1400px] mx-auto px-6 md:px-10">
-        <div className="grid grid-cols-1 lg:grid-cols-[400px_1fr] gap-12 lg:gap-20">
-
-          {/* Left: Title block */}
-          <div className="lg:sticky lg:top-[140px] self-start">
-            <div className="flex items-center gap-3 mb-6">
-              <span className="section-number" aria-hidden="true">D</span>
-              <span className="font-sans text-[11px] tracking-[0.2em] uppercase text-naets-dark-gray">
-                Description
-              </span>
-            </div>
-            <h2
-              className="font-condensed text-naets-black uppercase leading-none mb-6"
-              style={{ fontSize: 'clamp(30px, 3.5vw, 48px)', letterSpacing: '0.04em' }}
-            >
-              LA PRÉCISION EN MOUVEMENT
-            </h2>
-            <div className="w-8 h-px bg-naets-black mb-6" aria-hidden="true" />
-            <p className="font-sans text-naets-dark-gray leading-relaxed" style={{ fontSize: 13 }}>
-              {intro}
-            </p>
-          </div>
-
-          {/* Right: Sections */}
-          <div className="divide-y divide-naets-light-gray">
-            {sections.map((para, i) => {
-              const hasSeparator = para.includes(' — ');
-              if (hasSeparator) {
-                const dashIdx = para.indexOf(' — ');
-                const sectionTitle = para.slice(0, dashIdx);
-                const content = para.slice(dashIdx + 3);
-                return (
-                  <div key={i} className="py-6 first:pt-0 lg:first:pt-6">
-                    <p
-                      className="font-condensed text-naets-black uppercase mb-2"
-                      style={{ fontSize: 14, letterSpacing: '0.1em' }}
-                    >
-                      {sectionTitle}
-                    </p>
-                    <p className="font-sans text-naets-dark-gray leading-relaxed" style={{ fontSize: 13 }}>
-                      {content}
-                    </p>
-                  </div>
-                );
-              }
-              return (
-                <div key={i} className="py-6 first:pt-0 lg:first:pt-6">
-                  <p className="font-sans text-naets-dark-gray leading-relaxed" style={{ fontSize: 13 }}>
-                    {para}
-                  </p>
-                </div>
-              );
-            })}
-          </div>
-        </div>
-      </div>
-    </section>
   );
 }
 
@@ -355,7 +178,7 @@ function TechnicalAnalysis() {
   );
 }
 
-// ─── Star rating (compact, for product info) ──────────────────────────────────
+// ─── Star rating (compact) ────────────────────────────────────────────────────
 
 function StarRatingCompact({ rating = 4, count = 0 }: { rating?: number; count?: number }) {
   if (count === 0) {
@@ -383,9 +206,7 @@ function StarRatingCompact({ rating = 4, count = 0 }: { rating?: number; count?:
           </svg>
         ))}
       </div>
-      <span className="font-sans text-[11px] text-naets-dark-gray">
-        ({count} avis)
-      </span>
+      <span className="font-sans text-[11px] text-naets-dark-gray">({count} avis)</span>
     </div>
   );
 }
@@ -403,24 +224,17 @@ export default function ProductPageContent({ product, related }: ProductPageCont
   const { isInWishlist, toggle: toggleWishlist } = useWishlist();
   const isWishlisted = isInWishlist(product.id);
 
-  const complementary = useMemo(
-    () => getComplementaryProducts(product, 4),
-    [product]
-  );
+  const complementary = useMemo(() => getComplementaryProducts(product, 4), [product]);
 
   const categoryLabel =
-    product.category === 'chaussures'
-      ? 'Chaussures'
-      : product.category === 'vetements'
-      ? 'Vêtements'
-      : 'Accessoires';
+    product.category === 'chaussures' ? 'Chaussures'
+    : product.category === 'vetements' ? 'Vêtements'
+    : 'Accessoires';
 
   const categoryHref =
-    product.category === 'chaussures'
-      ? '/shop?category=chaussures'
-      : product.category === 'vetements'
-      ? '/shop?category=vetements'
-      : '/shop?category=accessoires';
+    product.category === 'chaussures' ? '/shop?category=chaussures'
+    : product.category === 'vetements' ? '/shop?category=vetements'
+    : '/shop?category=accessoires';
 
   const breadcrumbItems = [
     { label: 'Accueil', href: '/' },
@@ -436,9 +250,7 @@ export default function ProductPageContent({ product, related }: ProductPageCont
   }).format(product.price);
 
   const formattedCompareAt = product.compareAtPrice
-    ? new Intl.NumberFormat('fr-FR', { style: 'currency', currency: 'EUR', minimumFractionDigits: 0 }).format(
-        product.compareAtPrice
-      )
+    ? new Intl.NumberFormat('fr-FR', { style: 'currency', currency: 'EUR', minimumFractionDigits: 0 }).format(product.compareAtPrice)
     : null;
 
   const accordionItems = [
@@ -512,7 +324,6 @@ export default function ProductPageContent({ product, related }: ProductPageCont
       setTimeout(() => setSizeError(false), 2500);
       return;
     }
-    // TODO: connecter au vrai panier Shopify / backend plus tard.
     addItem(product, selectedSize, selectedColor);
     setAddedToCart(true);
     setTimeout(() => setAddedToCart(false), 2000);
@@ -531,9 +342,9 @@ export default function ProductPageContent({ product, related }: ProductPageCont
         {/* Two-column layout */}
         <div className="grid grid-cols-1 lg:grid-cols-[55fr_45fr] gap-10 lg:gap-16 pb-16 md:pb-20">
 
-          {/* ── LEFT — Gallery ─────────────────────────────────────────────── */}
+          {/* ── LEFT — Slider ──────────────────────────────────────────────── */}
           <div className="lg:sticky lg:top-[140px] self-start">
-            <ProductGallery productName={product.name} />
+            <ProductSlider images={product.images} productName={product.name} />
           </div>
 
           {/* ── RIGHT — Product info ────────────────────────────────────────── */}
@@ -571,10 +382,8 @@ export default function ProductPageContent({ product, related }: ProductPageCont
                 )}
               </div>
 
-              {/* Star rating */}
               <StarRatingCompact rating={5} count={4} />
 
-              {/* Badges */}
               {product.badges.length > 0 && (
                 <div className="flex gap-2 flex-wrap">
                   {product.badges.map((badge) => (
@@ -608,15 +417,21 @@ export default function ProductPageContent({ product, related }: ProductPageCont
                 onSelect={setSelectedColor}
               />
 
-              <SizeSelector
+              <ProductSizeDropdown
                 sizes={product.sizes}
-                selectedSize={selectedSize}
+                selected={selectedSize}
                 onSelect={(size) => {
                   setSelectedSize(size);
                   setSizeError(false);
                 }}
+                error={sizeError}
                 category={product.category}
               />
+
+              {/* Benefit icons */}
+              {product.benefits && product.benefits.length > 0 && (
+                <ProductBenefitIcons benefits={product.benefits} />
+              )}
 
               {/* Stock status */}
               <div className="flex items-center gap-2">
@@ -636,7 +451,7 @@ export default function ProductPageContent({ product, related }: ProductPageCont
               </div>
 
               <div>
-                <span className="font-sans text-[11px] tracking-[0.15em] uppercase font-medium block mb-3">
+                <span className="font-naets-label text-naets-black text-[10px] tracking-[0.2em] uppercase block mb-3">
                   QUANTITÉ
                 </span>
                 <QuantitySelector quantity={quantity} onChange={setQuantity} />
@@ -645,16 +460,6 @@ export default function ProductPageContent({ product, related }: ProductPageCont
 
             {/* CTA buttons */}
             <div className="flex flex-col gap-3">
-              {/* Size error */}
-              {sizeError && (
-                <p
-                  className="font-sans text-[11px] tracking-[0.08em] text-naets-dark-gray border-l-2 border-naets-black pl-3 py-1"
-                  role="alert"
-                >
-                  Sélectionnez une taille avant d&apos;ajouter au panier.
-                </p>
-              )}
-
               <button
                 onClick={handleAddToCart}
                 aria-label={
@@ -709,23 +514,34 @@ export default function ProductPageContent({ product, related }: ProductPageCont
 
             <ReassuranceRow />
 
-            {/* Accordions */}
             <Accordion items={accordionItems} />
 
           </div>
         </div>
       </div>
 
-      {/* ─── LONG DESCRIPTION ───────────────────────────────────────────────── */}
-      {product.longDescription && (
-        <LongDescriptionSection longDescription={product.longDescription} />
+      {/* ─── EDITORIAL BLOCK ────────────────────────────────────────────────── */}
+      {(product.summaryStatement || product.shortDescriptionIntro) && (
+        <ProductEditorialBlock
+          summaryStatement={product.summaryStatement ?? product.name}
+          shortDescriptionIntro={product.shortDescriptionIntro ?? product.shortDescription}
+          longDescription={product.longDescription ?? ''}
+          productName={product.name}
+        />
       )}
 
-      {/* ─── TECHNICAL ANALYSIS (chaussures only) ───────────────────────────── */}
-      {product.category === 'chaussures' && <TechnicalAnalysis />}
+      {/* ─── FEATURE IMAGE GRID ─────────────────────────────────────────────── */}
+      {product.category === 'chaussures' && (
+        <ProductFeatureImageGrid blocks={product.featureBlocks} />
+      )}
 
-      {/* ─── EXPLODED VIEW (chaussures only) ────────────────────────────────── */}
-      {product.category === 'chaussures' && <ProductExplodedView />}
+      {/* ─── EXPLODED ARCHITECTURE ──────────────────────────────────────────── */}
+      {product.category === 'chaussures' && (
+        <ProductExplodedArchitecture items={product.explodedView} />
+      )}
+
+      {/* ─── TECHNICAL ANALYSIS ─────────────────────────────────────────────── */}
+      {product.category === 'chaussures' && <TechnicalAnalysis />}
 
       {/* ─── TECHNICAL SPECS ────────────────────────────────────────────────── */}
       <section className="bg-naets-off-white py-16 md:py-20 border-t border-naets-light-gray">
@@ -771,6 +587,3 @@ export default function ProductPageContent({ product, related }: ProductPageCont
     </>
   );
 }
-
-// Suppress unused import warning for MessageCircle (available for future use)
-void MessageCircle;

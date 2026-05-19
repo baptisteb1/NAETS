@@ -33,6 +33,11 @@ export interface Product {
   inStock: boolean;
   usage: ProductUsage[];
   relatedProductIds?: string[];
+  summaryStatement?: string;
+  shortDescriptionIntro?: string;
+  benefits?: { title: string; text: string }[];
+  featureBlocks?: { title: string; text: string }[];
+  explodedView?: { number: string; title: string; text: string }[];
 }
 
 // ─── Size presets ─────────────────────────────────────────────────────────────
@@ -112,7 +117,26 @@ const chaussures: Product[] = [
       "Pensée pour les coureurs à la recherche d'un maintien précis et d'une sensation de légèreté absolue, la Æ-REFLEX combine architecture minimaliste et performance technique. Tige single mesh rip-stop, semelle ATPU réactive, plaque carbone intégrée.",
     shortDescription: "Architecture minimaliste. Performance technique.",
     longDescription:
-      "Pensée pour les coureurs à la recherche d'un maintien précis et d'une sensation de légèreté absolue, la Æ-REFLEX combine architecture minimaliste et performance technique.\n\nTIGE — Single mesh rip-stop monolayer ultra-léger. Mousses de colliers minimalistes. Renforts latéraux TPU discrets et efficaces.\n\nMAINTIEN — Lacets texturés anti-glissement. Languette fine en suède. Renfort TPU ciblé sur le contrefort. Le pied enveloppé, pas compressé.\n\nSEMELLE — Midsole ATPU 37 mm / drop 8 mm. Drop-in amovible en ATPU. Absorption calibrée pour la réactivité.\n\nPROPULSION — Plaque carbone évidée sur toute la longueur. Transfert d'énergie direct et précis à chaque foulée.\n\nADHÉRENCE — Zones de grip stratégiques avant-pied et talon. Efficace sur route sèche et humide. Équilibre entre réactivité, fluidité et précision.",
+      "Æ-Reflex — La précision en mouvement.\n\nPensée pour les coureurs à la recherche d'un maintien précis et d'une sensation de légèreté absolue, la Æ-Reflex combine architecture minimaliste et performance technique.\n\nLa tige associe une sélection de matériaux rigoureusement choisis :\n\n• Un renfort en TPU discret mais ultra-efficace stabilise le pied à haute vitesse sans alourdir la silhouette.\n\n• Des mousses de colliers minimalistes assurent juste ce qu'il faut de maintien pour verrouiller le talon, sans perte de sensation ni excès de matière : une précision pure, sans superflu.\n\n• Le single mesh rip-stop, tissé en monolayer ultra-léger et respirant, résiste à la flexion de la chaussure tout en enveloppant le pied comme une seconde peau.\n\n• Des renforts minimalistes intégrés dans la structure apportent un soutien latéral discret, maintenant la stabilité sans ajouter de poids.\n\n• Les lacets texturés à finition anti-glissement garantissent un serrage stable, même à haute intensité, pour un maintien total en activité.\n\n• Enfin, la languette fine en suède offre une sensation premium : douce, ultrafine et parfaitement ajustée, elle maintient le pied avec précision, sans pression.\n\nLe bloc semelle traduit la philosophie de la performance maîtrisée :\n\n• Une midsole en ATPU, 37 mm / drop 8 mm, en mousse super-critique à densité contrôlée restitue l'énergie avec précision, offrant une propulsion fluide et économique.\n\n• Un drop-in en ATPU complète le système, accompagnant la foulée pour un confort durable et un retour d'énergie optimal à chaque impact.\n\n• Une plaque carbone évidée, intégrée sur toute la longueur, stabilise la foulée et maximise la propulsion, permettant au coureur d'économiser son énergie.\n\n• La semelle externe présente des zones d'adhérence stratégiquement placées pour un grip optimal sur route sèche ou humide, sans compromettre la légèreté.",
+    summaryStatement: "Æ-Reflex incarne l'équilibre entre réactivité, fluidité et précision. Une structure invisible, un maintien ciblé.",
+    shortDescriptionIntro: "Æ-Reflex — La précision en mouvement. Pensée pour les coureurs à la recherche d'un maintien précis et d'une sensation de légèreté absolue, la Æ-Reflex combine architecture minimaliste et performance technique.",
+    benefits: [
+      { title: "MOUSSE ATPU",    text: "Équilibre & confort"       },
+      { title: "MAINTIEN CIBLÉ", text: "Ventilation maîtrisée"     },
+      { title: "RACE READY",     text: "Pensée pour l'intensité"   },
+      { title: "PROPULSION",     text: "Amorti & dynamisme"        },
+    ],
+    featureBlocks: [
+      { title: "TIGE TECHNIQUE",        text: "Single mesh rip-stop, maintien latéral discret et ventilation maîtrisée." },
+      { title: "PROPULSION CONTRÔLÉE", text: "Midsole ATPU, drop-in dynamique et plaque carbone évidée pleine longueur." },
+      { title: "ADHÉRENCE PRÉCISE",     text: "Zones de grip stratégiques pour route sèche ou humide, sans compromis sur la légèreté." },
+    ],
+    explodedView: [
+      { number: "01", title: "CHAUSSURE ENTIÈRE",  text: "Structure minimaliste, maintien ciblé et silhouette légère pensée pour la performance." },
+      { number: "02", title: "SEMELLE INTERNE",     text: "Drop-in ATPU conçu pour accompagner la foulée, améliorer le confort et optimiser le retour d'énergie." },
+      { number: "03", title: "MOUSSE",              text: "Midsole ATPU super-critique à densité contrôlée pour une propulsion fluide et économique." },
+      { number: "04", title: "TALON INTERNE",       text: "Verrouillage précis du talon grâce à des mousses de colliers minimalistes, sans excès de matière." },
+    ],
     technicalSpecs: {
       Usage: "Running / Entraînement",
       Drop: "8 mm",
