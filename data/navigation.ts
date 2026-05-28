@@ -108,6 +108,8 @@ export const footerNav = {
     { label: "Æ-SLYDE", href: "/collections/ae-slyde" },
   ],
   assistance: [
+    { label: "CONTACT", href: "/contact" },
+    { label: "LIVRAISON", href: "/livraison" },
     { label: "FAIRE UN RETOUR", href: "/retours" },
     { label: "FAQ", href: "/faq" },
     { label: "NOS REVENDEURS", href: "/revendeurs" },
@@ -117,8 +119,9 @@ export const footerNav = {
   naets: [
     { label: "COLLECTIVE", href: "/naets-collective" },
     { label: "PHILOSOPHIE", href: "/philosophie" },
-    { label: "INSIDE", href: "/inside-naets" },
+    { label: "INSIDE NÆTS", href: "/inside-naets" },
     { label: "BLOG", href: "/blog" },
+    { label: "RETAIL PARTENAIRE", href: "/retail-partenaire" },
   ],
 };
 
