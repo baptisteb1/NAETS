@@ -132,7 +132,7 @@ export default function AvisClientsPage() {
 
       {/* ── RATING SUMMARY ─────────────────────────────────────────────────── */}
       <section
-        className="py-20 px-8 md:px-16"
+        className="relative py-20 px-8 md:px-16 overflow-hidden"
         style={{ backgroundColor: '#111111' }}
         aria-label="Résumé des avis"
       >

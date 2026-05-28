@@ -1,5 +1,6 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
+import { ArrowRight } from 'lucide-react';
 
 // ─── Metadata ─────────────────────────────────────────────────────────────────
 
@@ -290,13 +291,14 @@ export default function RetoursPage() {
           </div>
 
           <div className="flex flex-col sm:flex-row items-center gap-4 shrink-0">
-            <button
-              type="button"
+            <Link
+              href="/contact"
               className="inline-flex items-center gap-3 font-sans font-medium bg-naets-black text-white px-10 py-4 transition-colors duration-150 hover:bg-naets-near-black"
               style={{ fontSize: 11, letterSpacing: '0.15em' }}
             >
               INITIER UN RETOUR
-            </button>
+              <ArrowRight size={12} />
+            </Link>
             <a
               href="mailto:contact@naets.fr"
               className="font-sans text-naets-dark-gray uppercase underline underline-offset-4 hover:text-naets-black transition-colors duration-150"
