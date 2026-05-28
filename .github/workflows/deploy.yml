@@ -33,6 +33,8 @@ jobs:
 
       - name: Build
         run: npm run build
+        env:
+          NEXT_PUBLIC_BASE_PATH: /NAETS
 
       - name: Disable Jekyll (allow _next/ folder)
         run: touch ./out/.nojekyll
