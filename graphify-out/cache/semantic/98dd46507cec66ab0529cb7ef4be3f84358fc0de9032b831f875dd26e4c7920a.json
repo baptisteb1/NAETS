@@ -1,0 +1,1 @@
+{"nodes": [{"id": "product_slug_notfound_productnotfound", "label": "ProductNotFound", "file_type": "code", "source_file": "app/product/[slug]/not-found.tsx", "source_location": null, "source_url": null, "captured_at": null, "author": null, "contributor": null}], "edges": [], "hyperedges": []}
